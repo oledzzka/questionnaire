@@ -1,4 +1,5 @@
 Django==2.0.4
 configparser==3.5.0
 mysqlclient==1.3.12
+django-nested-admin==3.0.21
 
