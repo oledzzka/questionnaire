@@ -14,9 +14,10 @@ import os
 from configparser import ConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import django_heroku
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 config = ConfigParser()
 config.read(os.path.join(BASE_DIR, 'django.conf'))
 
@@ -135,8 +136,10 @@ LOGOUT_REDIRECT_URL = 'core:home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
+STATIC_ROOT = config.get('file', 'STATIC_ROOT')
+STATIC_URL = '/op_static/'
+MEDIA_ROOT = config.get('file', 'MEDIA_ROOT')
+MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'core.User'
 
 
@@ -147,3 +150,5 @@ JS_REVERSE_JS_VAR_NAME = 'Urls'
 JS_REVERSE_EXCLUDE_NAMESPACES = ['admin']
 JS_REVERSE_JS_MINIFY = False
 JS_REVERSE_OUTPUT_PATH = os.path.join(os.path.join(BASE_DIR, 'core'), 'static')
+
+django_heroku.settings(locals())

@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include
 from django.conf.urls import url
+
+from questionnaire import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^nested_admin/', include('nested_admin.urls')),
     url(r'^', include(('core.urls', 'core'), namespace='core')),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT, show_indexes=True)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT, show_indexes=True)
