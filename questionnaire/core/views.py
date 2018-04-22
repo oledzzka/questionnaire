@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView as BaseLoginView
 from django.forms import Form, RadioSelect, ModelChoiceField
 from django.shortcuts import resolve_url
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, TemplateView
 
 from .models import Questionnaire, AnswersList, UserAnswer, Question
 
@@ -76,3 +76,18 @@ class QuestionListForm(FormView):
 
     def get_success_url(self):
         return resolve_url('core:question_list', pk=self.questionnaire.id)
+
+
+class QuestionnaireView(TemplateView):
+    template_name = 'core/questionnaire.html'
+    questionnaire = None
+
+    @method_decorator(login_required)
+    def dispatch(self, request, pk=None, *args, **kwargs):
+        self.questionnaire = Questionnaire.objects.filter(pk=self.request.GET.get('pk')).first()
+        return super(QuestionnaireView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionnaireView, self).get_context_data(**kwargs)
+        context['questionnaire'] = self.questionnaire
+        return context

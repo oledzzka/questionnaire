@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static "myjs/question.js" %}"></script>
+{% endblock %}
+
+{% block title %}
+    Question {{ questionnaire }}
+{% endblock %}
+
+{% block body %}
+    <main role="main" class="container">
+        <div class="jumbotron">
+            <div class="center">
+                <h1 class="text-center">{{ questionnaire.title }}</h1>
+                <div id="answers" class="mx-auto w-75"></div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

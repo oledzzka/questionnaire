@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'nested_admin',
+    'django_js_reverse',
     'core.apps.CoreConfig',
 ]
 
@@ -140,3 +141,9 @@ AUTH_USER_MODEL = 'core.User'
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+
+JS_REVERSE_JS_VAR_NAME = 'Urls'
+JS_REVERSE_EXCLUDE_NAMESPACES = ['admin']
+JS_REVERSE_JS_MINIFY = False
+JS_REVERSE_OUTPUT_PATH = os.path.join(os.path.join(BASE_DIR, 'core'), 'static')
