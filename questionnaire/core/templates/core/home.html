@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Title{% endblock %}
+
+{% block body %}
+    <div class="bg-light py-5 ">
+        <div class="container">
+            {% for question in  questionnaire_list %}
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <a class="'my-0 font-weight-normal" href="{% url 'core:questionnaire'%}?pk={{ question.id }}">{{ question.title }}</a>
+                    </div>
+                    <div class="card-body">
+
+                        <small class="text-muted">Дата: {{ question.date }}</small>
+                    </div>
+                </div>
+            {% empty %}
+                <li>No questionnaire!!!</li>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

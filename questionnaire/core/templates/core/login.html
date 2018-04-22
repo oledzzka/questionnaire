@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <div class="text-center">
+        <form method="post" action="{% url 'core:login' %}" class="form-signin">
+            {% csrf_token %}
+            {{ form | crispy  }}
+
+            <input class="btn btn-lg btn-primary btn-block" type="submit" value="login" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
+{% endblock %}
