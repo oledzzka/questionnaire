@@ -1,0 +1,32 @@
+{% load crispy_forms_tags %}
+
+
+{% if questionnaire_finished %}
+    <div class="container center-block">
+            {% for question in question_list_percent %}
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header text-center">
+                        <h4 class="my-0 font-weight-normal">{{ question.question }}</h4>
+                    </div>
+                    {%for answer in question.answer_list%}
+                        <div>{{answer.answer}}</div>
+                        <div class="progress">
+                              <div class="progress-bar text-dark" role="progressbar" style="width: {{ answer.percent }}%" aria-valuenow="{{ answer.percent }}" aria-valuemin="0" aria-valuemax="100"> {{ answer.percent }}%</div>
+                        </div>
+                   {% endfor %}
+                </div>
+            {% empty %}
+                <h2>No Question!!!</h2>
+            {% endfor %}
+    </div>
+{% else %}
+    <div class="form-check form-group row">
+        <form action="{% url 'core:question_list' pk=questionnaire.id %}" method="post" id="give_answer">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <input class="btn btn-primary btn-sm"  id='submit_answer' type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+{% endif %}

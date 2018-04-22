@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'nested_admin',
     'core.apps.CoreConfig',
 ]
@@ -137,3 +138,5 @@ LOGOUT_REDIRECT_URL = 'core:home'
 STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'core.User'
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
